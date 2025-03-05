@@ -4,5 +4,18 @@
 	<select id="checkUsername" parameterType="String" resultType="int">
 		select count(*) from user where username=#{username}
 	</select>
+	
+	<insert id="insertUser" parameterType="UserDto">
+		insert into user (user_id, username, password, nickname, hp, registered_date)
+		values (#{user_id}, #{username}, #{password}, #{nickname}, #{hp}, now())
+	</insert>
+	
+	<delete id="deleteUser" parameterType="int">
+		delete from user where user_id=#{user_id}
+	</delete>
+	
+	<select id="loginCheck" parameterType="Map" resultType="int">
+		select count(*) from user where username=#{username} and password=#{password}
+	</select>
 
 </mapper>
