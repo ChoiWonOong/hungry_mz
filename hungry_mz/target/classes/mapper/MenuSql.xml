@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.mapper.MenuMapper">
+    <select id="getMenusByRestaurantId" parameterType="int" resultType="MenuDto">
+        select * from menu where restaurant_id=#{restaurantId} order by price asc;
+    </select>
+    <select id="getMenuByMenuId" parameterType="int" resultType="MenuDto">
+        select * from menu where menu_id=#{menuId}
+    </select>
+    <insert id="insertMenu" parameterType="MenuDto">
+        INSERT INTO menu (restaurant_id, name, price, image)
+        VALUES (#{restaurantId}, #{name}, #{price}, #{image})
+    </insert>
+    <delete id="deleteMenuByMenuId" parameterType="int">
+        delete from menu where menu_id=#{menuId}
+    </delete>
+    <update id="updateMenu" parameterType="MenuDto">
+        UPDATE menu
+        SET
+            restaurant_id = #{restaurantId},
+            name = #{name},
+            price = #{price},
+            image = #{image}
+        WHERE menu_id = #{menuId}
+    </update>
+</mapper>

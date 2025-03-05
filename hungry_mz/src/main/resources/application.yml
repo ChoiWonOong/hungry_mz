@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: hungry_mz
+---
+server:
+  port: 9000
+
+#jsp setting
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
+  devtools:
+    restart:
+      exclude: WEB-INF/
+
+  #mysql setting
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://db-324odk-kr.vpc-pub-cdb.ntruss.com:3306/hungrymz?serverTimezone=Asia/Seoul
+    username: study
+    password: bitcamp!@#123
+
+#mybatis setting
+mybatis:
+  type-aliases-package: data.dto
+  mapper-locations: classpath:mapper//*.xml
