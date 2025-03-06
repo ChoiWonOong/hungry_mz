@@ -25,6 +25,7 @@ body * {
 </style>
 </head>
 <body>
+<jsp:include page="../layout/title.jsp"/>
 	<!-- The Modal -->
 	<div class="modal" id="myUpdateModal">
 		<div class="modal-dialog">
@@ -67,7 +68,7 @@ body * {
 	<div style="margin: 30px 100px;">
 		<div style="display: inline-block; margin: 20px 50px; width: 500px;">
 			<h6>이름 : ${dto.nickname}</h6>
-			<h6>핸드폰 : ${dto.mhp}</h6>
+			<h6>핸드폰 : ${dto.hp}</h6>
 			<h6>
 				가입일 :
 				<fmt:formatDate value="${dto.registered_date}" pattern="yyyy-MM-dd HH:mm" />
@@ -95,7 +96,8 @@ body * {
 		</script>
 			<button type="button" class="btn btn-sm btn-success"
 				data-bs-toggle="modal" data-bs-target="#myUpdateModal">
-				정보수정</button>
+				정보수정
+			</button>
 		</div>
 		
 		<!-- 내가 작성한 리뷰 -->
@@ -138,5 +140,6 @@ body * {
 			</table>
 		</div>
 	</div>
+</form>
 </body>
 </html>

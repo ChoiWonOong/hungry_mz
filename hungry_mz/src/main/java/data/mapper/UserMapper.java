@@ -13,4 +13,6 @@ public interface UserMapper {
 	public void insertUser(UserDto dto);
 	public int loginCheck(String username, String password);
 	public void deleteUser(int user_id);
+	public void updateUser(UserDto dto);
+	public UserDto getSelectByUsername(String username);
 }

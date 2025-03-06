@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 import data.service.UserService;
 import jakarta.servlet.http.HttpSession;
 
+
 @RestController
 public class LoginController {
 	@Autowired
 	UserService userService;
 	
-	@GetMapping("/user/login")
+	@GetMapping("/member/login")
 	public Map<String, String> login(
 			@RequestParam String username, @RequestParam String password,
 			HttpSession session
@@ -32,8 +33,12 @@ public class LoginController {
 		map.put("result",  chk?"success":"fail");
 		
 		return map;
-		
-		
+	}
+	
+	@GetMapping("/member/logout")
+	public void userlogin(HttpSession session) {
+		session.removeAttribute("loginstatus");
+		session.removeAttribute("username");
 	}
 	
 	

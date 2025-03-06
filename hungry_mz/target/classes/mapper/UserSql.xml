@@ -6,8 +6,8 @@
 	</select>
 	
 	<insert id="insertUser" parameterType="UserDto">
-		insert into user (user_id, username, password, nickname, hp, registered_date)
-		values (#{user_id}, #{username}, #{password}, #{nickname}, #{hp}, now())
+		insert into user (username, password, nickname, hp, registered_date)
+		values (#{username}, #{password}, #{nickname}, #{hp}, now())
 	</insert>
 	
 	<delete id="deleteUser" parameterType="int">
@@ -17,5 +17,13 @@
 	<select id="loginCheck" parameterType="Map" resultType="int">
 		select count(*) from user where username=#{username} and password=#{password}
 	</select>
+	
+	<update id="updateUser" parameterType="USerDto">
+		update user set nickname=#{nickname}, hp=#{hp} where user_id=#{user_id}
+	</update>
+	
+	<select id="getSelectByUsername" parameterType="String" resultType="UserDto">
+		select * from user where username=#{username}
+	</select> 
 
 </mapper>

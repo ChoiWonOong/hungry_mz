@@ -20,6 +20,7 @@ public class UserService {
 	}
 	
 	public void insertUser(UserDto dto) {
+		System.out.println("회원가입 데이터 : " +dto);
 		userMapper.insertUser(dto);
 	}
 	
@@ -29,5 +30,13 @@ public class UserService {
 	
 	public void deleteUser(int user_id) {
 		userMapper.deleteUser(user_id);
+	}
+	
+	public void updateUser(UserDto dto) {
+		userMapper.updateUser(dto);
+	}
+	
+	public UserDto getSelectByUsername(String username) {
+		return userMapper.getSelectByUsername(username);
 	}
 }
