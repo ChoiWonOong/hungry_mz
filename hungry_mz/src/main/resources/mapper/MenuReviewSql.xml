@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.mapper.BoardRepleMapper">
+	<insert id="insertReview" parameterType="MenuReviewDto">
+		insert into menureview (menu_id, username, content, photo, write_day) values
+		(#{menu_id}, #{username}, #{content}, #{photo}, now())
+	</insert>
+
+	<select id="getSelectReviews" parameterType="int" resultType="MenuReviewDto">
+		select * from menureview where menu_id=#{menu_id} order by review_id asc
+	</select>
+
+	<select id="getSelectData" parameterType="int" resultType="MenuReviewDto">
+		select * from menureview where review_id=#{review_id}
+	</select>
+
+	<delete id="deleteReview" parameterType="int">
+		delete from menureview where review_id=#{review_id}
+	</delete>
+</mapper>

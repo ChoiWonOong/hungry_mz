@@ -37,6 +37,50 @@
             float: left;
             width: 100px;
         }
+        
+        div.modal-header {
+        	background-color : #8fbc8f;
+        }
+
+		div.modal-body {
+			display : flex;
+			justify-content : center;
+			background-color : #f5f5dc;
+		}
+		
+		/*로그인 버튼*/
+		.btn1 {
+		  flex: 1 1 auto;
+		  margin-top: 20px;
+		  padding: 10px;
+		  width : 200px;
+		  text-align: center;
+		  text-transform: uppercase;
+		  transition: 0.5s;
+		  background-size: 200% auto;
+		  color: white;
+		  box-shadow: 0 0 20px #eee;
+		  border-radius: 10px;
+		  border : none;
+		 }
+		 
+		.btn1:hover {
+			background-position: right center; 
+			color : black;
+		}
+		
+		.loginbtn {
+			background-image: linear-gradient(to right, #DEB887 0%, #BDB76B 49%, #8fbc8f 100%);
+		}
+		
+		#loginId {
+			width : 300px;
+			margin-bottom : 10px;
+		}
+		
+		.texts {
+			font-size : 1.2em;
+		}
     </style>
 </head>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
@@ -48,8 +92,8 @@
             배고픈 MZ
         </a>
         <span style="margin-left: 300px; font-size: 15px">
-        <c:if test="${sessionScope.loginStatus!=null}">
-            <b>${sessionScope.loginId}</b>님이 로그인 중입니다.
+        <c:if test="${sessionScope.loginstatus!=null}">
+            <b>${sessionScope.username}</b>님이 로그인 중입니다.
         </c:if>
         </span>
     </h2>
@@ -61,34 +105,37 @@
             <a href="${root}/restaurant/list">식당 목록</a>
         </li>
         <li>
-            <a href="${root}/member/form">회원가입</a>
+        	<c:if test="${sessionScope.loginstatus==null}">
+            	<a href="${root}/member/form">회원가입</a>
+            </c:if>
         </li>
         <li>
             <a href="${root}//list">게시판</a>
         </li>
         <li>
-            <c:if test="${sessionScope.loginStatus==null}">
+            <c:if test="${sessionScope.loginstatus==null}">
                 <span data-bs-toggle="modal" data-bs-target="#myLoginModal" style="cursor:pointer;" id="login">로그인</span>
             </c:if>
-            <c:if test="${sessionScope.loginStatus!=null}">
+            <c:if test="${sessionScope.loginstatus!=null}">
                 <span style="cursor:pointer;" id="logout">로그아웃</span>
             </c:if>
         </li>
         <li>
-            <c:if test="${sessionScope.loginStatus!=null}">
-                <a href="${root}/mypage">내 정보</a>
+            <c:if test="${sessionScope.loginstatus!=null}">
+                <a href="${root}/member/mypage">내 정보</a>
             </c:if>
         </li>
+    </ul>
         <script type="text/javascript">
             $("#loginForm").submit(function(e){
                 e.preventDefault();// submit 기본 이벤트 무효화
                 alert("submit");
-                let loginId = $("loginId").val();
-                let loginPass = $("loginPassword").val();
+                let loginId = $("#loginId").val();
+                let loginPass = $("#loginPassword").val();
                 $.ajax({
                     type: "get",
                     dataType: "json",
-                    data:{"loginId":loginId, "loginPass":loginPass},
+                    data:{"username":loginId, "password":loginPass},
                     url: "./login",
                     success: function(res){
                         if(res.result=='success'){
@@ -111,7 +158,6 @@
                 });
             });
         </script>
-    </ul>
 
 </div>
 
@@ -119,12 +165,12 @@
 
 <!-- The Modal -->
 <div class="modal" id="myLoginModal">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog">
         <div class="modal-content">
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Modal Heading</h4>
+                <h4 class="modal-title">로그인</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
@@ -134,31 +180,28 @@
                     <table class="loginTab">
                         <tbody>
                         <tr>
-                            <th width="80">아이디</th>
+                            <th width="80" class = "texts">아이디</th>
                             <td>
-                                <input type="text" id="loginId" placeholder="아이디" class="form-control"
+                                <input type="text" id="loginId" class="form-control"
                                        required="required">
                             </td>
                         </tr>
                         <tr>
-                            <th width="80">비밀번호</th>
+                            <th width="80" class= "texts">비밀번호</th>
                             <td>
                                 <input type="password" id="loginPassword" class="form-control" required="required">
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2" align="center">
-                                <button type="submit" class="btn btn-sm btn-success">로그인</button>
+                                <button type="submit" class="btn1 loginbtn">
+                                로그인
+                                </button>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                 </form>
-            </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger btnclose" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -173,7 +216,7 @@
         $.ajax({
             type:"get",
             dataType:"json",
-            data:{"loginId":loginid,"loginPass":loginpass},
+            data:{"username":loginid,"password":loginpass},
             url:"${root}/member/login",
             success:function(res){
                 if(res.result=='success'){

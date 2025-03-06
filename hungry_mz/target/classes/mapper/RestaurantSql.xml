@@ -2,7 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="data.mapper.RestaurantMapper">
 	<select id="getRestaurantById" parameterType="int" resultType="RestaurantDto">
-		select * from retaurant where restaurant_id=#{restaurantId}
+		select * from restaurant where restaurant_id=#{restaurantId}
 	</select>
-
+	<select id="getRestaurantList" resultType="RestaurantDto">
+		select * from restaurant;
+	</select>
 </mapper>
