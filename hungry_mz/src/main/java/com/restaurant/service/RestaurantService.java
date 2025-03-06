@@ -10,11 +10,20 @@ import java.util.List;
 @Service
 public class RestaurantService {
     @Autowired
-    RestaurantMapper mapper;
+    private RestaurantMapper mapper;
     public RestaurantDto getRestaurantById(int id){
         return mapper.getRestaurantById(id);
     }
     public List<RestaurantDto> getRestaurantList(){
         return mapper.getRestaurantList();
+    }
+    public void insertRestaurant(RestaurantDto dto){
+        mapper.insertRestaurant(dto);
+    }
+    public RestaurantDto getRestaurantByTitle(String title){
+        return mapper.getRestaurantByTitle(title);
+    }
+    public boolean isExistByTitle(String title){
+        return mapper.getCountByTitle(title)!=0?true:false;
     }
 }

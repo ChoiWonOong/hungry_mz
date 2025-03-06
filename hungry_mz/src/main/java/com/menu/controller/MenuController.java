@@ -3,6 +3,7 @@ package com.menu.controller;
 import com.menu.service.MenuService;
 import com.naver.storage.NcpObjectStorageService;
 import data.dto.MenuDto;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,9 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MenuController {
     private final MenuService menuService;
-    @Autowired
-    private NcpObjectStorageService storageService;
-
+    private final NcpObjectStorageService storageService;
     @GetMapping("/menu/list")
     public List<MenuDto> getMenuListOrderByPriceAsc(){
         return menuService.getMenuListOrderByPriceAsc();

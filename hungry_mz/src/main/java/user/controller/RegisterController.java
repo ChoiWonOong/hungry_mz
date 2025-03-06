@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,12 +24,17 @@ import com.naver.storage.NcpObjectStorageService;
 
 @Controller
 @RequestMapping("/user")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class RegisterController {
 
 	@Autowired
 	final UserService userService;
-	
+
+	public RegisterController(UserService userService, NcpObjectStorageService storageService) {
+		this.userService = userService;
+		this.storageService = storageService;
+	}
+
 	//버켓 이름
 	private String bucketName = "bucketcamp148";
 	
