@@ -3,7 +3,7 @@ spring:
     name: hungry_mz
 ---
 server:
-  port: 9000
+  port: 8080
 
 #jsp setting
 spring:
@@ -13,7 +13,7 @@ spring:
       suffix: .jsp
   devtools:
     restart:
-      exclude: WEB-INF/
+      exclude: /WEB-INF/
 
   #mysql setting
   datasource:

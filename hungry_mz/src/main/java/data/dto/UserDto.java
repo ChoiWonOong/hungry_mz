@@ -1,8 +1,11 @@
 package data.dto;
 
-import java.security.Timestamp;
+
+import java.sql.Timestamp;
 
 import org.apache.ibatis.type.Alias;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 
@@ -14,5 +17,6 @@ public class UserDto {
 	private String password;
 	private String nickname;
 	private String hp;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
 	private Timestamp registered_date;
 }
