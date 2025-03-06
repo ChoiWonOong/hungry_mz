@@ -10,7 +10,12 @@ import java.sql.Timestamp;
 public class RestaurantDto {
     private int restaurantId;
     private String title;
-    private String location;
-    private String image;
+    private String location="";
+    private String image="";
     private Timestamp registeredDate;
+
+    public RestaurantDto(String title, String image) {
+        this.title = title;
+        this.image = image;
+    }
 }

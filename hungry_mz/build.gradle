@@ -1,45 +1,76 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.4.3'
-	id 'io.spring.dependency-management' version '1.1.7'
+    id 'java'
+    id 'org.springframework.boot' version '3.4.3'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'war'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-	}
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation("io.awspring.cloud:spring-cloud-starter-aws:2.4.4")
-	implementation("com.amazonaws:aws-java-sdk-s3:1.12.416")
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4'
-	compileOnly 'jakarta.servlet:jakarta.servlet-api:6.0.0'
-	implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0'
-	implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.0'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'com.mysql:mysql-connector-j'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.4'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // WebDriverManager
+    implementation 'io.github.bonigarcia:webdrivermanager:5.6.0'
+
+    // Selenium Java
+    implementation 'org.seleniumhq.selenium:selenium-java:4.18.1'
+    // Spring Boot 웹 스타터
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // MyBatis Spring Boot 스타터
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4'
+
+    // Spring Boot DevTools (런타임용)
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // MySQL Connector/J
+    runtimeOnly 'com.mysql:mysql-connector-j:8.0.33'
+
+    // Lombok (선택적 의존성)
+    compileOnly 'org.projectlombok:lombok'
+
+    annotationProcessor 'org.projectlombok:lombok' //수정한 부분
+    // Tomcat Starter (제공된 의존성으로 설정)
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+    compileOnly 'org.springframework.boot:spring-boot-starter-tomcat'
+    // Jakarta Servlet API (JSP 및 서블릿 관련 의존성)
+    compileOnly 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+
+    // Jakarta Servlet JSP JSTL API
+    implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0'
+
+    // Jakarta Servlet JSP JSTL 구현
+    implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.0'
+
+    // AWS S3 및 Cloud 의존성
+    implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.4.4'
+
+    // AWS SDK S3 의존성
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.416'
+
+    // Spring Boot Test Starter
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // MyBatis Spring Boot Test Starter
+    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.4'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }

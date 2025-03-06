@@ -15,7 +15,6 @@ import java.util.List;
 @RequestMapping("/restaurant")
 public class RestaurantController {
     private final RestaurantService restaurantService;
-
     @GetMapping("/")
     public List<RestaurantDto>getRestaurantList(){
         return restaurantService.getRestaurantList();
