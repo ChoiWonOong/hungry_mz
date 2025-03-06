@@ -1,24 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="data.mapper.RestaurantMapper">
-	<select id="getRestaurantById" resultType="data.dto.RestaurantDto">
-		SELECT restaurant_id AS restaurantId, title, location, image, registered_date
-		FROM restaurant
-		WHERE restaurant_id = #{restaurantId}
+	<select id="getRestaurantById" parameterType="int" resultType="RestaurantDto">
+		select * from restaurant where restaurant_id=#{restaurantId}
 	</select>
-	<select id="getCountByTitle" resultType="int" parameterType="String">
-		select count(*) from restaurant where title=#{title}
-	</select>
-	<select id="getRestaurantByTitle" parameterType="String" resultType="data.dto.RestaurantDto">
-		SELECT restaurant_id AS restaurantId, title, location, image, registered_date
-		FROM restaurant
-		WHERE title = #{title}
-	</select>
-	<select id="getRestaurantList" resultType="data.dto.RestaurantDto">
+	<select id="getRestaurantList" resultType="RestaurantDto">
 		select * from restaurant;
 	</select>
-	<insert id="insertRestaurant" parameterType="data.dto.RestaurantDto">
-		insert into restaurant (title, location, image)
-		values (#{title}, #{location}, #{image})
-	</insert>
 </mapper>

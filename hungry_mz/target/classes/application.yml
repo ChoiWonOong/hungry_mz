@@ -3,17 +3,18 @@ spring:
     name: hungry_mz
 ---
 server:
-  port: 8080
+  port: 9000
 
 #jsp setting
 spring:
-  devtools:
-    restart:
-      exclude: WEB-INF/**
   mvc:
     view:
       prefix: /WEB-INF/
       suffix: .jsp
+  devtools:
+    restart:
+      exclude: WEB-INF/
+
   #mysql setting
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -24,4 +25,4 @@ spring:
 #mybatis setting
 mybatis:
   type-aliases-package: data.dto
-  mapper-locations: classpath:mapper/**/*.xml
+  mapper-locations: classpath:mapper//*.xml
